@@ -69,16 +69,17 @@ const setName = (req, res) => {
   if (!req.body.firstname || !req.body.lastname) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
-    res.status(400).json({ error: 'firstname and lastname are both required' });
-  } else {
-    // if required fields are good, then set name
-    name = `${req.body.firstname} ${req.body.lastname}`;
-
-    // respond with our new name updated.
-    // This could just be a 200 response to say the name was good
-    // but we will also throw in the json of the new name just for convenience
-    res.json({ name });
+    return res.status(400).json({ error: 'firstname and lastname are both required' });
   }
+    
+  // if required fields are good, then set name
+  name = `${req.body.firstname} ${req.body.lastname}`;
+
+  // respond with our new name updated.
+  // This could just be a 200 response to say the name was good
+  // but we will also throw in the json of the new name just for convenience
+  // We need to return here for ESLint, since this is a branching arrow function
+  return res.json({ name });
 };
 
 // function to handle a request to any non-real resources (404)
