@@ -10,6 +10,22 @@
 <body>
     <h1>Welcome to page 1 </h1>
     <!-- links or URLs are always GET resources as they are getting (retrieving) a resource -->
+    
+    <!-- Here we are using the build-in handlebars helpers #if and #each. these work like if
+    and foreach control structures in most programming languages, although they are more limited.
+    The #if statement will check if a variable exists (in this case the names variable). If it
+    does, the html within will be rendered out. The #each structure will loop over everything
+    in the names variable, assuming it is iteratable (like an array). Within the #each, this is
+    the keyword representing that entry -->
+    {{#if names}}
+    <h2>Names:</h2>
+    <ul>
+        {{#each names}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
     <a href="/">Home</a>
     <a href="/page2">Page 2</a>
     <a href="/getName">Show Name</a>
