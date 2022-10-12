@@ -23,20 +23,20 @@ const hostIndex = (req, res) => {
 // controller functions in Express receive the full HTTP request
 // and a pre-filled out response object to send
 const hostPage1 = (req, res) => {
+  // In this example, our page1.handlebars has a variable for looping over an array of
+  // names. We could give it the entire myArray, but if we want to limit the data we use
+  // our javascript controller code to filter it beforehand and then have the template
+  // display it. Even though handlebars supports some light logic with build in helpers, it
+  // is not the job of the view to perform logical operations.
+  const myArray = ['Austin', 'Cody', 'Binky', 'Aron'];
+  const filtered = myArray.filter(x => x.length <= 4);
+
   // res.render takes a name of a page to render.
   // These must be in the folder you specified as views in your main app.js file
   // Additionally, you don't need .handlebars because you registered the file
   // type in the app.js as handlebars. Calling res.render('index')
   // actually calls index.handlebars. A second parameter of JSON can be passed
   // into the handlebars to be used as variables with #{varName}
-  const myArray = ['Austin', 'Cody', 'Binky', 'Aron'];
-  const filtered = myArray.filter(x => x.length <= 4);
-
-  // In this example, our page1.handlebars has a variable for looping over an array of
-  // names. We could give it the entire myArray, but if we want to limit the data we use
-  // our javascript controller code to filter it beforehand and then have the template
-  // display it. Even though handlebars supports some light logic with build in helpers, it
-  // is not the job of the view to perform logical operations.
   return res.render('page1', {
     title: 'Page 1',
     names: filtered,
