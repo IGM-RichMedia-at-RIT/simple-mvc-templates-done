@@ -28,7 +28,7 @@ const hostPage1 = (req, res) => {
   // our javascript controller code to filter it beforehand and then have the template
   // display it. Even though handlebars supports some light logic with build in helpers, it
   // is not the job of the view to perform logical operations.
-  const myArray = ['Austin', 'Cody', 'Binky', 'Aron'];
+  const myArray = ['Austin', 'Cody', 'Erika', 'Eric'];
   const filtered = myArray.filter(x => x.length <= 4);
 
   // res.render takes a name of a page to render.
