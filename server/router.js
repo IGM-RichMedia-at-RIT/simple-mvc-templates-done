@@ -21,7 +21,7 @@ const router = (app) => {
   // For example www.webpage.com
   app.get('/', controllers.index);
 
-  app.get('/*', controllers.notFound);
+  app.get('/*wild', controllers.notFound);
 
   // When someone POSTS to /setName, call controllers.setName
   // For example, a form submission to www.webpage.com/setName

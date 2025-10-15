@@ -7,8 +7,6 @@ const express = require('express');
 const compression = require('compression');
 // favicon library to handle favicon requests
 const favicon = require('serve-favicon');
-// library to handle POST requests any information sent in an HTTP body
-const bodyParser = require('body-parser');
 // express handlebars is an express plugin for handlebars templating
 const expressHandlebars = require('express-handlebars');
 
@@ -37,13 +35,13 @@ app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
 app.use(compression());
 
 // parse form POST requests as application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 // parse application/json body requests. These are usually POST requests or
 // requests with a body parameter in AJAX
 // Alternatively, this might be a web API request from a mobile app,
 // another server or another application
-app.use(bodyParser.json());
+app.use(express.json());
 
 // app.set sets one of the express config options
 // set up the view (V of MVC) to use handlebars
