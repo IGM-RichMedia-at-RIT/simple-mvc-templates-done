@@ -1,6 +1,6 @@
 // There is no reason for the name here except as an
 // example of how to set something for the POST
-let name = 'unknown'; // We will set and get an arbitrary name
+let names = ['unknown']; // We will set and get an arbitrary list of names
 
 // function to handle requests to the main page
 // controller functions in Express receive the full HTTP request
@@ -11,9 +11,9 @@ const hostIndex = (req, res) => {
   // Additionally, you don't need .handlebars because you registered the file type
   // in the app.js as handlebars. Calling res.render('index')
   // actually calls index.handlebars. A second parameter of JSON can be passed
-  // into the handlebars to be used as variables with #{varName}
+  // into the handlebars to be used as variables with {{varName}}
   res.render('index', {
-    currentName: name,
+    currentName: names[names.length - 1],
     title: 'Home',
     pageName: 'Home Page',
   });
@@ -24,12 +24,11 @@ const hostIndex = (req, res) => {
 // and a pre-filled out response object to send
 const hostPage1 = (req, res) => {
   // In this example, our page1.handlebars has a variable for looping over an array of
-  // names. We could give it the entire myArray, but if we want to limit the data we use
+  // names. We could give it the entire names array, but if we want to limit the data we use
   // our javascript controller code to filter it beforehand and then have the template
   // display it. Even though handlebars supports some light logic with build in helpers, it
   // is not the job of the view to perform logical operations.
-  const myArray = ['Austin', 'Cody', 'Erika', 'Eric'];
-  const filtered = myArray.filter(x => x.length <= 4);
+  const filtered = names.filter(name => name !== 'unknown');
 
   // res.render takes a name of a page to render.
   // These must be in the folder you specified as views in your main app.js file
@@ -63,7 +62,7 @@ const getName = (req, res) => {
   // res.json returns json to the page.
   // Since this sends back the data through HTTP
   // you can't send any more data to this user until the next response
-  res.json({ name });
+  res.json({ name: names[names.length - 1] });
 };
 
 // function to handle a request to set the name
@@ -82,13 +81,13 @@ const setName = (req, res) => {
   }
     
   // if required fields are good, then set name
-  name = `${req.body.firstname} ${req.body.lastname}`;
+  names.push(`${req.body.firstname} ${req.body.lastname}`);
 
   // respond with our new name updated.
   // This could just be a 200 response to say the name was good
   // but we will also throw in the json of the new name just for convenience
   // We need to return here for ESLint, since this is a branching arrow function
-  return res.json({ name });
+  return res.json({ name: names[names.length - 1] });
 };
 
 // function to handle a request to any non-real resources (404)
